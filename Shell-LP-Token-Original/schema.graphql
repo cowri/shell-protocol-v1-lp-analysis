@@ -1,0 +1,32 @@
+type User @entity {
+  id: ID! 
+  usdSwapped: BigDecimal!
+  withdrawals: [Withdrawal!]!
+  deposits: [Deposit!]!
+  shellTransfers: [ShellTransfer!]! 
+}
+
+type ShellTransfer @entity {
+  id: ID! 
+  timestamp: BigInt! 
+  block: BigInt!
+  shellsTransfered: BigDecimal! 
+  from: String! 
+  to: String! 
+}
+
+type Withdrawal @entity {
+  id: ID!
+  timestamp: BigInt!
+  block: BigInt!
+  shellsBurnt: BigDecimal!
+  user: User!
+}
+
+type Deposit @entity {
+  id: ID! 
+  timestamp: BigInt!
+  block: BigInt!
+  shellsMinted: BigDecimal!
+  user: User!
+}

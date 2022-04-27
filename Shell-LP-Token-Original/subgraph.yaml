@@ -1,0 +1,66 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Shell
+    network: mainnet
+    source:
+      address: "0x2E703D658f8dd21709a7B458967aB4081F8D3d05"
+      abi: Shell
+      startBlock: 10930218
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - AssetIncluded
+        - AssimilatorIncluded
+        - FrozenSet
+        - OwnershipTransfered
+        - ParametersSet
+        - PartitionRedeemed
+        - PoolPartitioned
+        - Trade
+        - Transfer
+      abis:
+        - name: Shell
+          file: ./abis/Shell.json
+      eventHandlers:
+        #- event: Approval(indexed address,indexed address,uint256)
+        #  handler: handleApproval
+        #- event: AssetIncluded(indexed address,indexed address,uint256)
+        #  handler: handleAssetIncluded
+        #- event: AssimilatorIncluded(indexed address,indexed address,indexed address,address)
+        #  handler: handleAssimilatorIncluded
+        #- event: FrozenSet(bool)
+        #  handler: handleFrozenSet
+        #- event: OwnershipTransfered(indexed address,indexed address)
+        #  handler: handleOwnershipTransfered
+        #- event: ParametersSet(uint256,uint256,uint256,uint256,uint256)
+        #  handler: handleParametersSet
+        #- event: PartitionRedeemed(indexed address,indexed address,uint256)
+        #  handler: handlePartitionRedeemed
+        #- event: PoolPartitioned(bool)
+        #  handler: handlePoolPartitioned
+        #- event: Trade(indexed address,indexed address,indexed address,uint256,uint256)
+        #  handler: handleTrade
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      callHandlers:
+        #- function: originSwap(address,address,uint256,uint256,uint256)
+        #  handler: handleOriginSwapCall
+        #- function: partitionedWithdraw(address[],uint256[])
+        #  handler: handlePartitionedWithdrawCall
+        - function: proportionalDeposit(uint256,uint256)
+          handler: handleProportionalDepositCall
+        - function: proportionalWithdraw(uint256,uint256)
+          handler: handleProportionalWithdrawCall
+        - function: selectiveDeposit(address[],uint256[],uint256,uint256)
+          handler: handleSelectiveDepositCall
+        - function: selectiveWithdraw(address[],uint256[],uint256,uint256)
+          handler: handleSelectiveWithdrawCall
+        #- function: targetSwap(address,address,uint256,uint256,uint256)
+        #  handler: handleTargetSwapCall
+      file: ./src/mapping.ts
