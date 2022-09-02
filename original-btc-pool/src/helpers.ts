@@ -1,7 +1,6 @@
-import { log, BigInt, BigDecimal, Address } from '@graphprotocol/graph-ts'
+import { BigInt, BigDecimal, Address } from '@graphprotocol/graph-ts'
 
 import {User, ShellTransfer, Withdrawal, Deposit} from '../generated/schema'
-import { Transfer } from '../generated/Shell/Shell'
 
 export let ZERO_BI = BigInt.fromI32(0)
 export let ONE_BI = BigInt.fromI32(1)
@@ -10,9 +9,8 @@ export let ONE_BD = BigDecimal.fromString('1')
 export let BI_18 = BigInt.fromI32(18)
 
 export const zeroAddress = Address.zero()
-// '0x0000000000000000000000000000000000000000'
-
-export const SHELL: string = "0x8f26D7bAB7a73309141A291525C965EcdEa7Bf42"
+export const deadAddress = '0x000000000000000000000000000000000000dead'
+export const mintAndBurnAddresses = [zeroAddress.toHexString(), deadAddress]
 
 export function createUser(address: Address): User {
   let user = User.load(address.toHexString())

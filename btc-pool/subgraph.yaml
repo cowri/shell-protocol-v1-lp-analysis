@@ -1,0 +1,33 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Shell
+    network: mainnet
+    source:
+      address: "0xC2D019b901f8D4fdb2B9a65b5d226Ad88c66EE8D"
+      abi: Shell
+      startBlock: 11533879
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - AssetIncluded
+        - AssimilatorIncluded
+        - FrozenSet
+        - OwnershipTransfered
+        - ParametersSet
+        - PartitionRedeemed
+        - PoolPartitioned
+        - Trade
+        - Transfer
+      abis:
+        - name: Shell
+          file: ./abis/Shell.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
